@@ -6,6 +6,9 @@ if(EXISTS "${CMAKE_ROOT}/Modules/CPack.cmake")
     if(NOT DEFINED CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS_NO_WARNINGS)
       set(CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS_NO_WARNINGS ON)
     endif()
+
+    set(CMAKE_INSTALL_SYSTEM_RUNTIME_DESTINATION ${CMAKE_INSTALL_BINDIR})
+
     include(${CMAKE_ROOT}/Modules/InstallRequiredSystemLibraries.cmake)
   endif()
 

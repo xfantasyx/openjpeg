@@ -84,7 +84,7 @@ cmake -G "Visual Studio 16 2019" \
    -DCMAKE_CONFIGURATION_TYPES="Debug;Release;RelWithDebInfo" \
    -DCMAKE_INSTALL_PREFIX="${install_path}" \
    -DCMAKE_INSTALL_BINDIR="$<CONFIGURATION>/bin" \
-   -DCMAKE_INSTALL_BINDIR="$<CONFIGURATION>/lib" \
+   -DCMAKE_INSTALL_LIBDIR="$<CONFIGURATION>/lib" \
    -DOPENJPEG_INSTALL_PACKAGE_DIR="cmake" \
    ${TARGET_SOURCE_DIR} || exit 1
 
@@ -114,30 +114,30 @@ fi
 
 
 # copy runtime bin files
-if [ -n "${__runtime_dir}" ]; then
+# if [ -n "${__runtime_dir}" ]; then
 
-   echo "=== start copy ${TARGET} runtime files ==="
+#    echo "=== start copy ${TARGET} runtime files ==="
 
-   _BUILD_TYPES=("Debug" "Release" "RelWithDebInfo")
+#    _BUILD_TYPES=("Debug" "Release" "RelWithDebInfo")
 
-   for build_type in "${_BUILD_TYPES[@]}" ; do
-      if [ -e "${install_path}/${build_type}/bin" ]; then
-         for _filepath in ${install_path}/${build_type}/bin/*.dll; do
-            if [ -f "$_filepath" ]; then
-               cp --verbose -rf "$_filepath" "$__runtime_dir/${build_type}/bin"
-            fi
-         done
+#    for build_type in "${_BUILD_TYPES[@]}" ; do
+#       if [ -e "${install_path}/${build_type}/bin" ]; then
+#          for _filepath in ${install_path}/${build_type}/bin/*.dll; do
+#             if [ -f "$_filepath" ]; then
+#                cp --verbose -rf "$_filepath" "$__runtime_dir/${build_type}/bin"
+#             fi
+#          done
 
-         for _filepath in ${install_path}/${build_type}/lib/*.pdb; do
-            if [ -f "$_filepath" ]; then
-               cp --verbose -rf "$_filepath" "$__runtime_dir/${build_type}/bin"
-            fi
-         done
-      fi
-   done
+#          for _filepath in ${install_path}/${build_type}/lib/*.pdb; do
+#             if [ -f "$_filepath" ]; then
+#                cp --verbose -rf "$_filepath" "$__runtime_dir/${build_type}/bin"
+#             fi
+#          done
+#       fi
+#    done
 
-   echo "=== finished copy ${TARGET} runtime files ==="
-fi
+#    echo "=== finished copy ${TARGET} runtime files ==="
+# fi
 
 
 
